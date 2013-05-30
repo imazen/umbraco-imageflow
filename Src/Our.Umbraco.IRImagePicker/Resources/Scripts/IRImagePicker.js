@@ -112,6 +112,7 @@
             // Create elements
             var outerPanel = $("<div class='propertypane' />");
             var innerPanel = $("<div />");
+            innerPanel.css("line-height", thumbHeight + "px");
 
             var img = $("<img />");
             img.attr("src", url + "?width=" + thumbWidth + "&height=" + thumbHeight +"&mode=crop");
