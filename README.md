@@ -1,0 +1,2 @@
+# IRImagePicker
+IRImagePicker is an image picker data-type for the [open source CMS Umbraco](http://umbraco.com) allowing you to pick and crop images dynamically using the [ImageResizer](http://imageresizing.net/) library.
