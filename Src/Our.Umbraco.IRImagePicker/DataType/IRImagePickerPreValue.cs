@@ -36,6 +36,14 @@ namespace Our.Umbraco.IRImagePicker.DataType
         public int ThumbWidth { get; set; }
 
         /// <summary>
+        /// Gets or sets a value indicating whether to auto launch the cropper.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if should auto launch cropper; otherwise, <c>false</c>.
+        /// </value>
+        public bool AutoLaunchCropper { get; set; }
+
+        /// <summary>
         /// Gets or sets the data format.
         /// </summary>
         /// <value>

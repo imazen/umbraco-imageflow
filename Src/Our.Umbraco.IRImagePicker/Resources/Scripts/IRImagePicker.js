@@ -50,7 +50,7 @@
             self._setValue($(self.imageIdField).val());
         },
         
-        _setValue: function (id, resetQueryString)
+        _setValue: function (id, fromPick)
         {
             var self = this;
             
@@ -78,11 +78,18 @@
                         
                         // Setup the preview panel
                         self._createPreviewPanel(url, name);
+                        
+                        if (fromPick && $(self.el).data("autolaunchcropper"))
+                        {
+                            $(self.valueContainer)
+                                .find("a.irip-editcrop")
+                                .triggerHandler("click.irip");
+                        }
                     }
                 });
             }
             
-            if (id == "" || id == "0" || resetQueryString)
+            if (id == "" || id == "0" || fromPick)
             {
                 // Value is empty so clear the querystring too   
                 $(self.queryStringField).val("");
@@ -96,28 +103,34 @@
             // Clear any previous panel
             self._detroyPreviewPanel();
             
+            // Prepair variables
+            var imageWidth = $(self.el).data("width");
+            var imageHeight = $(self.el).data("height");
+            var thumbWidth = $(self.el).data("thumbwidth");
+            var thumbHeight = $(self.el).data("thumbheight");
+
             // Create elements
             var outerPanel = $("<div class='propertypane' />");
             var innerPanel = $("<div />");
-            
-            //TODO: Make image thumbnail same as crop params
+
             var img = $("<img />");
-            img.attr("src", url);
-            img.css("width", "100px");
+            img.attr("src", url + "?width=" + thumbWidth + "&height=" + thumbHeight +"&mode=crop");
+            img.css("width", thumbWidth + "px");
+            img.css("height", thumbHeight + "px");
 
             var filenameSpan = $("<span />");
             filenameSpan.text(name);
 
-            var viewLink = $("<a />");
-            viewLink.attr("href", url);
+            var viewLink = $("<a class='irip-view' />");
+            viewLink.attr("href", url + "?width=" + imageWidth + "&height=" + imageHeight +"&mode=crop");
             viewLink.attr("target", "_blank");
             viewLink.text(irip_viewtext);
 
-            var editCropLink = $("<a />");
+            var editCropLink = $("<a class='irip-editcrop' />");
             editCropLink.attr("href", "#");
             editCropLink.text(irip_editcroptext);
 
-            var removeLink = $("<a />");
+            var removeLink = $("<a  class='irip-remove' />");
             removeLink.attr("href", "#");
             removeLink.text(irip_removetext);
 

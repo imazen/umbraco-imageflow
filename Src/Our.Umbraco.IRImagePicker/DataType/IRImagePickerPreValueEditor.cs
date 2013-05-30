@@ -33,6 +33,11 @@ namespace Our.Umbraco.IRImagePicker.DataType
         protected TextBox txtThumbWidth;
 
         /// <summary>
+        /// Auto launch cropper
+        /// </summary>
+        protected CheckBox chkAutoLaunchCropper;
+
+        /// <summary>
         /// The data format to retreive the value as
         /// </summary>
         protected RadioButtonList rdoDataFormat;
@@ -72,6 +77,7 @@ namespace Our.Umbraco.IRImagePicker.DataType
             txtWidth.Text = preValue.Width.ToString();
             txtHeight.Text = preValue.Height.ToString();
             txtThumbWidth.Text = preValue.ThumbWidth.ToString();
+            chkAutoLaunchCropper.Checked = preValue.AutoLaunchCropper;
             rdoDataFormat.SelectedValue = preValue.DataFormat.ToString();
         }
 
@@ -85,6 +91,7 @@ namespace Our.Umbraco.IRImagePicker.DataType
             writer.AddPrevalueHeading("<img src='" + Page.ClientScript.GetWebResourceUrl(typeof(IRImagePickerDataEditor), "Our.Umbraco.IRImagePicker.Resources.Images.ir_logo.png") + "' alt='Image Resizer' style='width:200px;margin:0 0 5px 130px;' />");
             writer.AddPrevalueRow("Image Dimensions", "Enter the width and height for the selected image.", txtWidth, new LiteralControl(" x "), txtHeight);
             writer.AddPrevalueRow("Thumb Width", "Set the width of the thumbnail to show in the editor.", txtThumbWidth);
+            writer.AddPrevalueRow("Auto Launch Croppper", "Select whether to auto launch the cropper after an image is picked.", chkAutoLaunchCropper);
             writer.AddPrevalueRow("Data format", "Select the data format in which to store the value of this data type in.<br />XML if you intend to work with it in XSLT or JSON if you intend to work with it via Razor or C#.", rdoDataFormat);
         }
 
@@ -99,6 +106,7 @@ namespace Our.Umbraco.IRImagePicker.DataType
             txtWidth = new TextBox { ID = "txtWidth" };
             txtHeight = new TextBox { ID = "txtHeight" };
             txtThumbWidth = new TextBox { ID = "txtThumbWidth" };
+            chkAutoLaunchCropper = new CheckBox { ID = "chkAutoLaunchCropper" };
 
             rdoDataFormat = new RadioButtonList { ID = "rdoDataFormat" };
             rdoDataFormat.Items.Add(IRImagePickerDataFormat.Xml.ToString());
@@ -109,6 +117,7 @@ namespace Our.Umbraco.IRImagePicker.DataType
             Controls.AddPrevalueControls(txtWidth);
             Controls.AddPrevalueControls(txtHeight);
             Controls.AddPrevalueControls(txtThumbWidth);
+            Controls.AddPrevalueControls(chkAutoLaunchCropper);
             Controls.AddPrevalueControls(rdoDataFormat);
         }
 
@@ -125,6 +134,7 @@ namespace Our.Umbraco.IRImagePicker.DataType
                 Width = Int32.TryParse(txtWidth.Text, out parsed) ? parsed : 0,
                 Height = Int32.TryParse(txtHeight.Text, out parsed) ? parsed : 0,
                 ThumbWidth = Int32.TryParse(txtThumbWidth.Text, out parsed) ? parsed : 0,
+                AutoLaunchCropper = chkAutoLaunchCropper.Checked,
                 DataFormat = (IRImagePickerDataFormat)Enum.Parse(typeof(IRImagePickerDataFormat), rdoDataFormat.SelectedValue)
             };
 

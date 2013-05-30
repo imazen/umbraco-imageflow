@@ -41,7 +41,7 @@ namespace Our.Umbraco.IRImagePicker.DataType
             {
                 var val = Value.ToString().DeserializeJsonTo<IRImagePickerValue>();
 
-                val.QueryString = string.Format("?w={0}&h={1}&mode=crop{2}",
+                val.QueryString = string.Format("?width={0}&height={1}&mode=crop{2}",
                     _preValue.Width,
                     _preValue.Height,
                     val.QueryString);

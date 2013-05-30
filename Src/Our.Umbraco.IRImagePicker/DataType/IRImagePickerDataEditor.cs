@@ -165,7 +165,9 @@ namespace Our.Umbraco.IRImagePicker.DataType
             ctrlWrapper.Attributes.Add("data-dtdid", _dtdId.ToString());
             ctrlWrapper.Attributes.Add("data-width", _preValue.Width.ToString());
             ctrlWrapper.Attributes.Add("data-height", _preValue.Height.ToString());
-            ctrlWrapper.Attributes.Add("data-thumbWidth", _preValue.ThumbWidth.ToString());
+            ctrlWrapper.Attributes.Add("data-thumbwidth", _preValue.ThumbWidth.ToString());
+            ctrlWrapper.Attributes.Add("data-thumbheight", Math.Round(((decimal)_preValue.Height / _preValue.Width) * _preValue.ThumbWidth).ToString());
+            ctrlWrapper.Attributes.Add("data-autolaunchcropper", _preValue.AutoLaunchCropper.ToString().ToLower());
 
             // Setup hidden fields
             hdnImageId.ID = ID + "_hdnImageId";
