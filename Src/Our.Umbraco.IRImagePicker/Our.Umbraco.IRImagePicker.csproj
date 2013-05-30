@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{EEFA6B97-80FE-4C63-AAD2-8DA89F0F7BE0}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Our.Umbraco.IRImagePicker</RootNamespace>
+    <AssemblyName>Our.Umbraco.IRImagePicker</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="businesslogic">
+      <HintPath>..\..\Packages\Umbraco480\businesslogic.dll</HintPath>
+    </Reference>
+    <Reference Include="cms">
+      <HintPath>..\..\Packages\Umbraco480\cms.dll</HintPath>
+    </Reference>
+    <Reference Include="controls">
+      <HintPath>..\..\Packages\Umbraco480\controls.dll</HintPath>
+    </Reference>
+    <Reference Include="interfaces">
+      <HintPath>..\..\Packages\Umbraco480\interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="umbraco">
+      <HintPath>..\..\Packages\Umbraco480\umbraco.dll</HintPath>
+    </Reference>
+    <Reference Include="umbraco.editorControls">
+      <HintPath>..\..\Packages\Umbraco480\umbraco.editorControls.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DataType\AbstractJsonPrevalueEditor.cs" />
+    <Compile Include="DataType\IRImagePickerData.cs" />
+    <Compile Include="DataType\IRImagePickerDataEditor.cs" />
+    <Compile Include="DataType\IRImagePickerDataFormat.cs" />
+    <Compile Include="DataType\IRImagePickerDataType.cs" />
+    <Compile Include="DataType\IRImagePickerPreValue.cs" />
+    <Compile Include="DataType\IRImagePickerPreValueEditor.cs" />
+    <Compile Include="DataType\IRImagePickerValue.cs" />
+    <Compile Include="Extensions\IRImagePickerValueExtensions.cs" />
+    <Compile Include="Extensions\JsonExtensions.cs" />
+    <Compile Include="Extensions\ObjectExtensions.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PropertyEditors\IRImagePickerValueConverter.cs" />
+    <Compile Include="IRImagePicker.cs" />
+    <Compile Include="Web\UI\App_GlobalResources\IRImagePicker.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IRImagePicker.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Scripts\IRImagePicker.js" />
+    <EmbeddedResource Include="Web\UI\App_GlobalResources\IRImagePicker.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>IRImagePicker.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Images\ir_logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Styles\IRImagePicker.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Web\UI\Umbraco\Plugins\IRImagePicker\TreePicker.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>REM #################################################
+REM # Copy files 
+REM #################################################
+
+xcopy /s /y "$(TargetDir)Our.Umbraco.IRImagePicker.*" "D:\Sandbox\UmbracoCms.4.10.1\bin\"
+xcopy /s /y "$(ProjectDir)Web\UI\*.aspx" "D:\Sandbox\UmbracoCms.4.10.1\"
+xcopy /s /y "$(ProjectDir)Web\UI\*.resx" "D:\Sandbox\UmbracoCms.4.10.1\"</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

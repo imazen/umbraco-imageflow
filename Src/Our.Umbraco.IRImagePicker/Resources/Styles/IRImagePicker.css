@@ -1,0 +1,23 @@
+﻿.irip-valuecontainer .propertypane > div 
+{
+    border: dotted 1px #ccc;
+    background: #fff;
+    padding: 5px;    
+}
+
+.irip-valuecontainer img 
+{
+    vertical-align: middle
+}
+
+.irip-valuecontainer span,
+.irip-valuecontainer a 
+{
+    margin-left: 15px;
+}
+
+.irip-valuecontainer a:last-child 
+{
+    color: red;
+    margin-right: 10px;
+}
